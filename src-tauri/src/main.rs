@@ -38,6 +38,7 @@ pub struct ProcessDetails {
 #[tauri::command]
 fn scan_ports() -> Vec<PortInfo> {
     let mut ports: Vec<PortInfo> = Vec::new();
+    let mut seen: std::collections::HashSet<(u16, String, u32)> = std::collections::HashSet::new();
 
     #[cfg(target_os = "macos")]
     {
@@ -73,6 +74,12 @@ fn scan_ports() -> Vec<PortInfo> {
                 if let Some(port_str) = addr.split(':').last() {
                     let port_clean = port_str.chars().take_while(|c| c.is_ascii_digit()).collect::<String>();
                     if let Ok(port) = port_clean.parse::<u16>() {
+                        let key = (port, protocol.clone(), pid);
+                        if seen.contains(&key) {
+                            continue;
+                        }
+                        seen.insert(key);
+
                         let local_address = addr.to_string();
 
                         let (executable_path, command, _working_directory) =
@@ -80,7 +87,7 @@ fn scan_ports() -> Vec<PortInfo> {
                                 get_process_info(pid)
                             });
 
-    let mut sys = System::new_all();
+        let mut sys = System::new_all();
                         let (cpu_usage, memory_usage, start_time, parent_pid) =
                             if let Some(process) = sys.process(sysinfo::Pid::from_u32(pid)) {
                                 (
@@ -133,6 +140,12 @@ fn scan_ports() -> Vec<PortInfo> {
 
             if let Some(port_str) = local_address.split(':').last() {
                 if let Ok(port) = port_str.parse::<u16>() {
+                    let key = (port, protocol.clone(), 0u32);
+                    if seen.contains(&key) {
+                        continue;
+                    }
+                    seen.insert(key);
+
                     let users_field = if parts.len() > 6 {
                         parts[6]
                     } else {
@@ -220,6 +233,12 @@ fn scan_ports() -> Vec<PortInfo> {
             if let Some(port_str) = local_address.split(':').last() {
                 if let Ok(port) = port_str.parse::<u16>() {
                     let pid: u32 = parts[4].parse().unwrap_or(0);
+                    let key = (port, protocol.clone(), pid);
+                    if seen.contains(&key) {
+                        continue;
+                    }
+                    seen.insert(key);
+
                     let (process_name, executable_path, command) =
                         get_process_info_windows(pid);
 
