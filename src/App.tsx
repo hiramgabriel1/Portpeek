@@ -78,6 +78,21 @@ function App() {
     saveSettings(newSettings);
   };
 
+  const conflicts = useMemo(() => {
+    const portMap = new Map<number, PortInfo[]>();
+    ports.forEach((p) => {
+      if (!portMap.has(p.port)) portMap.set(p.port, []);
+      portMap.get(p.port)!.push(p);
+    });
+    return Array.from(portMap.values()).filter((group) => group.length > 1);
+  }, [ports]);
+
+  const conflictPorts = useMemo(() => {
+    const set = new Set<number>();
+    conflicts.forEach((group) => group.forEach((p) => set.add(p.port)));
+    return set;
+  }, [conflicts]);
+
   const filteredAndSorted = useMemo(() => {
     let result = [...ports];
 
@@ -121,7 +136,7 @@ function App() {
           case "favorites":
             return isFavorite(p.port, favorites);
           case "conflicts":
-            return false;
+            return conflictPorts.has(p.port);
           default:
             return true;
         }
@@ -143,16 +158,7 @@ function App() {
     });
 
     return result;
-  }, [ports, search, filter, sortField, sortDirection, favorites]);
-
-  const conflicts = useMemo(() => {
-    const portMap = new Map<number, PortInfo[]>();
-    ports.forEach((p) => {
-      if (!portMap.has(p.port)) portMap.set(p.port, []);
-      portMap.get(p.port)!.push(p);
-    });
-    return Array.from(portMap.values()).filter((group) => group.length > 1);
-  }, [ports]);
+  }, [ports, search, filter, sortField, sortDirection, favorites, conflictPorts]);
 
   const filterCounts = useMemo(() => {
     const counts: Record<string, number> = { all: ports.length };
