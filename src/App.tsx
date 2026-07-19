@@ -79,18 +79,18 @@ function App() {
   };
 
   const conflicts = useMemo(() => {
-    const portMap = new Map<number, PortInfo[]>();
+    const portMap = new Map<number, Set<number>>();
     ports.forEach((p) => {
-      if (!portMap.has(p.port)) portMap.set(p.port, []);
-      portMap.get(p.port)!.push(p);
+      if (!portMap.has(p.port)) portMap.set(p.port, new Set());
+      portMap.get(p.port)!.add(p.pid);
     });
-    return Array.from(portMap.values()).filter((group) => group.length > 1);
+    return Array.from(portMap.entries())
+      .filter(([, pids]) => pids.size > 1)
+      .map(([port]) => port);
   }, [ports]);
 
   const conflictPorts = useMemo(() => {
-    const set = new Set<number>();
-    conflicts.forEach((group) => group.forEach((p) => set.add(p.port)));
-    return set;
+    return new Set(conflicts);
   }, [conflicts]);
 
   const filteredAndSorted = useMemo(() => {
