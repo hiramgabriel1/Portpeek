@@ -4,7 +4,7 @@
   <img src="assets/portpeek.png" alt="PortPeek Logo" width="120" />
 </p>
 
-A desktop utility to inspect and manage local network ports. Inspired by [Portero](https://github.com/sudharsan-selvaraj/portero).
+A desktop utility to inspect and manage local network ports.
 
 ## Features
 
