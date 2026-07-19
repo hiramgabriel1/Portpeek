@@ -61,9 +61,16 @@ function App() {
   }, [fetchPorts, settings.refreshInterval]);
 
   const handleKill = async (pid: number) => {
-    if (confirm(`Kill process ${pid}?`)) {
-      await killProc(pid);
-      fetchPorts();
+    if (!confirm(`Kill process ${pid}?`)) return;
+    try {
+      const result = await killProc(pid);
+      if (result) {
+        fetchPorts();
+      } else {
+        alert(`Failed to kill process ${pid}`);
+      }
+    } catch (err: any) {
+      alert(`Error: ${err}`);
     }
   };
 

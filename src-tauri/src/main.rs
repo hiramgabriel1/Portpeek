@@ -460,15 +460,66 @@ fn get_process_details(pid: u32) -> Option<ProcessDetails> {
 
 #[tauri::command]
 fn kill_process(pid: u32) -> Result<bool, String> {
-    let mut sys = System::new_all();
-    if let Some(process) = sys.process(sysinfo::Pid::from_u32(pid)) {
-        if process.kill() {
-            Ok(true)
-        } else {
-            Err("Failed to kill process".to_string())
+    if pid == 0 {
+        return Err("Invalid PID".to_string());
+    }
+
+    #[cfg(target_os = "macos")]
+    {
+        let output = Command::new("kill")
+            .args(["-9", &pid.to_string()])
+            .output();
+
+        match output {
+            Ok(out) => {
+                if out.status.success() {
+                    Ok(true)
+                } else {
+                    let stderr = String::from_utf8_lossy(&out.stderr);
+                    Err(format!("Failed to kill process: {}", stderr.trim()))
+                }
+            }
+            Err(e) => Err(format!("Failed to execute kill: {}", e)),
         }
-    } else {
-        Err("Process not found".to_string())
+    }
+
+    #[cfg(target_os = "linux")]
+    {
+        let output = Command::new("kill")
+            .args(["-9", &pid.to_string()])
+            .output();
+
+        match output {
+            Ok(out) => {
+                if out.status.success() {
+                    Ok(true)
+                } else {
+                    let stderr = String::from_utf8_lossy(&out.stderr);
+                    Err(format!("Failed to kill process: {}", stderr.trim()))
+                }
+            }
+            Err(e) => Err(format!("Failed to execute kill: {}", e)),
+        }
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        let output = Command::new("taskkill")
+            .args(["/F", "/PID", &pid.to_string()])
+            .creation_flags(0x08000000)
+            .output();
+
+        match output {
+            Ok(out) => {
+                if out.status.success() {
+                    Ok(true)
+                } else {
+                    let stderr = String::from_utf8_lossy(&out.stderr);
+                    Err(format!("Failed to kill process: {}", stderr.trim()))
+                }
+            }
+            Err(e) => Err(format!("Failed to execute taskkill: {}", e)),
+        }
     }
 }
 
