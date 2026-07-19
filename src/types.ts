@@ -38,7 +38,12 @@ export type FilterType =
   | "python"
   | "java"
   | "system"
-  | "user";
+  | "user"
+  | "apps"
+  | "terminal"
+  | "other"
+  | "favorites"
+  | "conflicts";
 
 export interface Settings {
   refreshInterval: number;
