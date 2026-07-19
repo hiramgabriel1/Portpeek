@@ -1,0 +1,14 @@
+/Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/deps/serde-03587907e5724e8c.d: /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/build/serde-e424cc8869643796/out/private.rs
+
+/Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/deps/libserde-03587907e5724e8c.rlib: /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/build/serde-e424cc8869643796/out/private.rs
+
+/Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/deps/libserde-03587907e5724e8c.rmeta: /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/build/serde-e424cc8869643796/out/private.rs
+
+/Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/Users/hiram.dev/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/build/serde-e424cc8869643796/out/private.rs:
+
+# env-dep:OUT_DIR=/Users/hiram.dev/Documents/portpeek/src-tauri/target/debug/build/serde-e424cc8869643796/out
