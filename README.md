@@ -1,7 +1,7 @@
 # PortPeek
 
 <p align="center">
-  <img src="public/portpeek.png" alt="PortPeek Logo" width="120" />
+  <img src="assets/portpeek.png" alt="PortPeek Logo" width="120" />
 </p>
 
 A desktop utility to inspect and manage local network ports. Inspired by [Portero](https://github.com/sudharsan-selvaraj/portero).
